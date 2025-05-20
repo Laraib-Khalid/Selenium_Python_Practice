@@ -621,6 +621,9 @@ driver.find_element(By.LINK_TEXT,"Lenovo").click()
 
 driver.find_element(By.LINK_TEXT, "Errorcode 403").click()
 
+
+driver.switch_to.new_window()
+driver.get("https://letcode.in/frame")
 time.sleep(20)
 
 # driver.find_element(By.XPATH, "//input[@name='username']").send_keys("Admin")

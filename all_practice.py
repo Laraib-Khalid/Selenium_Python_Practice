@@ -557,6 +557,15 @@ driver.find_element(By.LINK_TEXT, "Lenovo").click()
 driver.find_element(By.LINK_TEXT, "Errorcode 403").click()
 
 
+# ------------------------ Open New Window in the Same Browser ------------------------
+
+# Open a new browser window or tab
+driver.switch_to.new_window()
+
+# Navigate to the specified URL in the new window
+driver.get("https://letcode.in/frame")
+
+
 
 # Pause to observe final state
 time.sleep(20)

@@ -2,9 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
+from time import sleep
 
-driver = webdriver.Firefox()
+driver = webdriver.Chrome()
 driver.maximize_window()
 driver.implicitly_wait(10)  # seconds
 driver.get("https://opensource-demo.orangehrmlive.com")
@@ -23,7 +23,7 @@ if act_title == exp_title:
 else:
     print("Login Test Fail")
 
-time.sleep(2)
+sleep(2)
 
 driver.switch_to.new_window('tab')
 # driver = webdriver.Firefox()
@@ -31,6 +31,6 @@ driver.switch_to.new_window('tab')
 driver.get("https://demo.nopcommerce.com/")
 wait = WebDriverWait(driver, 10)
 wait.until(EC.visibility_of_element_located((By.XPATH,"//img[contains(@alt,'nopCommerce demo store')]")))
-time.sleep(2)
+sleep(2)
 
 driver.close()
