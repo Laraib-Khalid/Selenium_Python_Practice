@@ -615,6 +615,12 @@ dropdown_option = driver.find_element(By.XPATH,"//div[text()='Item 18']")
 # actions.move_to_element(dropdown_option).perform()
 time.sleep(5)
 dropdown_option.click()
+
+
+driver.find_element(By.LINK_TEXT,"Lenovo").click()
+
+driver.find_element(By.LINK_TEXT, "Errorcode 403").click()
+
 time.sleep(20)
 
 # driver.find_element(By.XPATH, "//input[@name='username']").send_keys("Admin")

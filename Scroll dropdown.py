@@ -22,4 +22,6 @@ dropdown_option = driver.find_element(By.XPATH,"//div[text()='Item 65']")
 actions.move_to_element(dropdown_option).perform()
 time.sleep(10)
 dropdown_option.click()
+
+
 time.sleep(10)

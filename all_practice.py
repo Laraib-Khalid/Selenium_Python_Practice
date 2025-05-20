@@ -546,5 +546,17 @@ time.sleep(5)  # Pause for visibility or animation delay
 dropdown_option.click()
 
 
+# ------------------------ Link Click Operation ------------------------
+# Locate and click the link with the visible text "Lenovo"
+driver.find_element(By.LINK_TEXT, "Lenovo").click()
+
+
+# ------------------------ Broken Link Click Operation ------------------------
+
+# Locate and click the link with the visible text "Errorcode 403"
+driver.find_element(By.LINK_TEXT, "Errorcode 403").click()
+
+
+
 # Pause to observe final state
 time.sleep(20)
