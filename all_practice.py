@@ -549,7 +549,7 @@ dropdown_option.click()
 # ------------------------ Link Click Operation ------------------------
 # Locate and click the link with the visible text "Lenovo"
 driver.find_element(By.LINK_TEXT, "Lenovo").click()
-
+driver.back()
 
 # ------------------------ Broken Link Click Operation ------------------------
 

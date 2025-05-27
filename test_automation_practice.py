@@ -619,6 +619,8 @@ dropdown_option.click()
 
 driver.find_element(By.LINK_TEXT,"Lenovo").click()
 
+driver.back()
+
 driver.find_element(By.LINK_TEXT, "Errorcode 403").click()
 
 
