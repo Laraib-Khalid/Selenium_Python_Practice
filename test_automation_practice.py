@@ -365,6 +365,7 @@ driver.find_element(By.XPATH,"//button[@id='btn3']").click()
 
 driver.find_element(By.XPATH,"//input[@id='Wikipedia1_wikipedia-search-input']").send_keys("Python")
 driver.find_element(By.XPATH,"//input[@class='wikipedia-search-button']").click()
+time.sleep(2)
 wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@class='wikipedia-search-results']")))
 time.sleep(2)
 driver.find_element(By.XPATH,"//a[text()='Python (programming language)']").click()
@@ -626,6 +627,15 @@ driver.find_element(By.LINK_TEXT, "Errorcode 403").click()
 
 driver.switch_to.new_window()
 driver.get("https://letcode.in/frame")
+driver.switch_to.frame("firstFr")
+iframe_title = driver.title
+print(f"Iframe title is {iframe_title}")
+driver.find_element(By.XPATH,"//input[@name='fname']").send_keys("Laraib")
+driver.find_element(By.XPATH,"//input[@name='lname']").send_keys("Khalid")
+second_frame = driver.find_element(By.XPATH,"//iframe[@src='innerframe']")
+driver.switch_to.frame(second_frame)
+driver.find_element(By.XPATH,"//input[@name='email']").send_keys("test@gmail.com")
+driver.save_screenshot("frame.png")
 time.sleep(20)
 
 # driver.find_element(By.XPATH, "//input[@name='username']").send_keys("Admin")

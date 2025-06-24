@@ -343,7 +343,7 @@ driver.find_element(By.XPATH, "//button[@id='btn3']").click()
 driver.find_element(By.XPATH, "//input[@id='Wikipedia1_wikipedia-search-input']").send_keys("Python")
 driver.find_element(By.XPATH, "//input[@class='wikipedia-search-button']").click()
 wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@class='wikipedia-search-results']")))
-time.sleep(2)
+time.sleep(5)
 driver.find_element(By.XPATH, "//a[text()='Python (programming language)']").click()
 time.sleep(5)
 
@@ -559,12 +559,42 @@ driver.find_element(By.LINK_TEXT, "Errorcode 403").click()
 
 # ------------------------ Open New Window in the Same Browser ------------------------
 
-# Open a new browser window or tab
+# Open a new browser window or tab (same browser session)
 driver.switch_to.new_window()
 
-# Navigate to the specified URL in the new window
+# Navigate to the URL that contains nested iframes
 driver.get("https://letcode.in/frame")
 
+# ------------------------ Interact with Outer Frame ------------------------
+
+# Switch to the outer (First) frame using its name attribute ("firstFr")
+driver.switch_to.frame("firstFr")
+
+# Get and print the title of the current frame's page
+iframe_title = driver.title
+print(f"Iframe title is {iframe_title}")
+
+# Locate and fill the "First Name" input field inside the outer frame
+driver.find_element(By.XPATH, "//input[@name='fname']").send_keys("Laraib")
+
+# Locate and fill the "Last Name" input field inside the outer frame
+driver.find_element(By.XPATH, "//input[@name='lname']").send_keys("Khalid")
+
+# ------------------------ Interact with Nested Frame ------------------------
+
+# Locate the second (inner) iframe element using its 'src' attribute
+second_frame = driver.find_element(By.XPATH, "//iframe[@src='innerframe']")
+
+# Switch to the nested iframe inside the outer frame
+driver.switch_to.frame(second_frame)
+
+# Locate and fill the "Email" input field inside the inner frame
+driver.find_element(By.XPATH, "//input[@name='email']").send_keys("test@gmail.com")
+
+# ------------------------ Take Screenshot ------------------------
+
+# Take a screenshot of the current browser window after interacting with both frames
+driver.save_screenshot("frame.png")
 
 
 # Pause to observe final state
