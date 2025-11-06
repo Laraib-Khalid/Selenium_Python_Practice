@@ -1,4 +1,5 @@
 import time
+import os
 import re
 from datetime import datetime
 from selenium import webdriver
@@ -599,3 +600,92 @@ driver.save_screenshot("frame.png")
 
 # Pause to observe final state
 time.sleep(20)
+
+
+
+
+# ------------------------ Download File From Chrome ------------------------
+
+# Create a custom download folder inside the current working directory
+download_path = os.path.join(os.getcwd(), "Download", "Chrome_Files")
+os.makedirs(download_path, exist_ok=True)  # Create folder if it doesn’t exist
+
+# Set Chrome preferences for automatic file download
+prefs = {
+    "download.default_directory": download_path,  # Save files in this folder
+    "download.prompt_for_download": False,  # Disable download confirmation popup
+    "safebrowsing.enabled": True  # Allow safe file downloads
+}
+
+# Configure Chrome options and apply preferences
+options = webdriver.ChromeOptions()
+options.add_experimental_option("prefs", prefs)
+
+# Launch Chrome browser with the specified options
+driver = webdriver.Chrome(options=options)
+driver.maximize_window()
+
+# Open webpage containing downloadable files
+driver.get("https://omayo.blogspot.com/p/page7.html")
+
+# Click on the "ZIP file" link to trigger the file download
+driver.find_element(By.LINK_TEXT, "ZIP file").click()
+
+# Wait a few seconds for the download to complete
+time.sleep(5)
+
+# Check if any .zip file has been downloaded successfully
+downloaded_files = os.listdir(download_path)  # List all files in download folder
+zip_files = [f for f in downloaded_files if f.endswith(".zip")]  # Filter only ZIP files
+
+# Print result based on download verification
+if zip_files:
+    print(f"✅ Download successful! ZIP file found: {zip_files[0]}")
+else:
+    print("❌ Download failed! No ZIP file found in the download directory.")
+
+# Take a screenshot of the browser after download
+driver.save_screenshot("file_download.png")
+
+# Pause briefly to observe the final state before closing
+time.sleep(3)
+
+
+
+# ------------------------ Download Firefox Files ------------------------
+
+# Create a custom download folder inside the current working directory
+download_path = os.path.join(os.getcwd(), "Download", "Firefox_Files")
+os.makedirs(download_path, exist_ok=True)  # Create the folder if it doesn’t already exist
+
+# Set Firefox preferences for automatic file downloads
+options = webdriver.FirefoxOptions()
+options.set_preference("browser.download.dir", download_path)  # Set custom download directory
+options.set_preference("browser.download.folderList", 2)       # Use custom location instead of default
+options.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/zip")  # Auto-download ZIP files without asking
+
+# Launch Firefox browser with the defined options
+driver = webdriver.Firefox(options=options)
+driver.maximize_window()
+
+# Open the webpage containing downloadable files
+driver.get("https://omayo.blogspot.com/p/page7.html")
+
+# Click on the "ZIP file" link to start the download
+driver.find_element(By.LINK_TEXT, "ZIP file").click()
+
+# Wait for the file to finish downloading
+time.sleep(5)
+
+# Check the download directory for downloaded files
+downloaded_files = os.listdir(download_path)
+print(f"Files in download folder: {downloaded_files}")
+
+# Look for any file ending with .zip
+zip_files = [f for f in downloaded_files if f.endswith(".zip")]
+
+# Verify if the ZIP file was downloaded successfully
+if zip_files:
+    print(f"✅ Download successful! ZIP file found: {zip_files[0]}")
+else:
+    print("❌ Download failed! No ZIP file found in the download directory.")
